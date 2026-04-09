@@ -1,8 +1,9 @@
 package com.example.muzammil_chutiya.app
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,7 +27,10 @@ fun AppManager(
                 }
             )
         }
-        composable <ScreenTwoRoute> {
+        composable <ScreenTwoRoute>(
+            enterTransition = { slideInHorizontally(animationSpec = tween(durationMillis = 400 , delayMillis = 400) , initialOffsetX = {it}) },
+            exitTransition = { slideOutHorizontally(animationSpec = tween(durationMillis = 400 , delayMillis = 400) , targetOffsetX = { -it}) }
+        ) {
             ScreenTwo(
                 onGoBackClick = {
                     navController.navigate(ScreenOneRoute){
